@@ -1,4 +1,13 @@
+import sys
 import unittest
+from pathlib import Path
+
+# Allow `python3 -m unittest discover -s tests -v` to resolve the package
+# without requiring `PYTHONPATH=src` in local shells or CI jobs.
+REPO_ROOT = Path(__file__).resolve().parents[1]
+SRC_PATH = REPO_ROOT / "src"
+if str(SRC_PATH) not in sys.path:
+    sys.path.insert(0, str(SRC_PATH))
 
 from aegis.parsers.valgrind_parser import parse_valgrind_trace
 
